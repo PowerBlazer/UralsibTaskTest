@@ -38,13 +38,15 @@
     </div>
     <div class="flex-row align-content-center gap-5 m-3">
         
-            var currentPage = HttpContextAccessor.HttpContext!.Request.Query["page"].FirstOrDefault();
-            var count = HttpContextAccessor.HttpContext!.Request.Query["count"].FirstOrDefault();
-            var nextPage = string.IsNullOrEmpty(currentPage) ? 2 : int.Parse(currentPage) + 1;
-            var prevPage = string.IsNullOrEmpty(currentPage) || currentPage == "1" ? 1 : int.Parse(currentPage) - 1;
+            @{
+                var currentPage = HttpContextAccessor.HttpContext!.Request.Query["page"].FirstOrDefault();
+                var count = HttpContextAccessor.HttpContext!.Request.Query["count"].FirstOrDefault();
+                var nextPage = string.IsNullOrEmpty(currentPage) ? 2 : int.Parse(currentPage) + 1;
+                var prevPage = string.IsNullOrEmpty(currentPage) || currentPage == "1" ? 1 : int.Parse(currentPage) - 1;
     
-            <a href="?page=@prevPage&count=@count"@(currentPage == "1" ? "style=display:none" : "") class="btn btn-danger" role="button">Prev</a>
-            <a href="?page=@nextPage&count=@count"class="btn btn-primary" role="button">Next</a>
+                <a href="?page=@prevPage&count=@count"@(currentPage == "1" ? "style=display:none" : "") class="btn btn-danger" role="button">Prev</a>
+                <a href="?page=@nextPage&count=@count"class="btn btn-primary" role="button">Next</a>
+            }
         
     </div>
 </div>
