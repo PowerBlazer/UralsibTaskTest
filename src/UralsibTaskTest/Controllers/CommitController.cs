@@ -20,7 +20,7 @@ public class CommitController: BaseController
     }
     
     [HttpGet("owner")]
-    public async Task<IActionResult> CommitsUser(int page = 0,int count = 20)
+    public async Task<IActionResult> CommitsUser(int page = 1,int count = 20)
     {
         if (!await _commitService.ContainsCommitsInUserAsync(Login!))
         {
@@ -31,7 +31,7 @@ public class CommitController: BaseController
         }
         
         var commitsBase = await _commitService
-            .GetCommitsInUserAsync(Login!,count,page*10);
+            .GetCommitsInUserAsync(Login!,count,(page-1)*10);
 
         var result = commitsBase
             .Select(CommitMapper.ToDto)
@@ -42,7 +42,7 @@ public class CommitController: BaseController
     
     [HttpGet("user")]
     public async Task<IActionResult> Commits(string login, string repository,
-        int page = 0, int count = 10)
+        int page = 1, int count = 10)
     {
         if (!await _commitService.ContainCommitsInUserAndRepositoryAsync(login, repository))
         {
@@ -55,7 +55,7 @@ public class CommitController: BaseController
         }
 
         var commits = await _commitService.GetCommitsInUserAndRepositoryAsync(login, repository,
-            count, page * 10);
+            count, (page-1) * 10);
         
         var result = commits
             .Select(CommitMapper.ToDto)
