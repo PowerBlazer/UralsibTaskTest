@@ -3899,11 +3899,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Прогры\\GitHubTest\\UralsibTaskTest\\UralsibTaskTest.csproj",
+      "projectUniqueName": "D:\\GitHub\\UralsibTaskTest\\src\\UralsibTaskTest\\UralsibTaskTest.csproj",
       "projectName": "UralsibTaskTest",
-      "projectPath": "D:\\Прогры\\GitHubTest\\UralsibTaskTest\\UralsibTaskTest.csproj",
+      "projectPath": "D:\\GitHub\\UralsibTaskTest\\src\\UralsibTaskTest\\UralsibTaskTest.csproj",
       "packagesPath": "C:\\Users\\power\\.nuget\\packages\\",
-      "outputPath": "D:\\Прогры\\GitHubTest\\UralsibTaskTest\\obj\\",
+      "outputPath": "D:\\GitHub\\UralsibTaskTest\\src\\UralsibTaskTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\power\\AppData\\Roaming\\NuGet\\NuGet.Config",

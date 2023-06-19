@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "i4v3RtorSaHSZzRW0kHQu7WPF1DP0/NxwyhpsYIoE2GLs/QVFRDYXjSTZqMxaWk2qkAGKzX+FJ7Ud480szZdiw==",
+  "dgSpecHash": "aisRNT+Hnw/8ciVkmvbSDMar5PBMLG285/FUSu0cejUmEN00e6EwFqekOguiyp7ptyOv652liDZ3MK2jf8EWhg==",
   "success": true,
-  "projectFilePath": "D:\\Прогры\\GitHubTest\\UralsibTaskTest\\UralsibTaskTest.csproj",
+  "projectFilePath": "D:\\GitHub\\UralsibTaskTest\\src\\UralsibTaskTest\\UralsibTaskTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\power\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\power\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

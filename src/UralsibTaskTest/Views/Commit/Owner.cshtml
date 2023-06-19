@@ -37,8 +37,7 @@
         <a class="btn btn-primary" role="button" asp-area="" asp-controller="Commit" asp-action="UpdateCommitsInUser">Update</a>
     </div>
     <div class="flex-row align-content-center gap-5 m-3">
-        @if (Model.Count > 0)
-        {
+        
             var currentPage = HttpContextAccessor.HttpContext!.Request.Query["page"].FirstOrDefault();
             var count = HttpContextAccessor.HttpContext!.Request.Query["count"].FirstOrDefault();
             var nextPage = string.IsNullOrEmpty(currentPage) ? 2 : int.Parse(currentPage) + 1;
@@ -46,7 +45,7 @@
     
             <a href="?page=@prevPage&count=@count"@(currentPage == "1" ? "style=display:none" : "") class="btn btn-danger" role="button">Prev</a>
             <a href="?page=@nextPage&count=@count"class="btn btn-primary" role="button">Next</a>
-        }
+        
     </div>
 </div>
 
