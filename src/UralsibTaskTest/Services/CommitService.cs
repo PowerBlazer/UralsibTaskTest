@@ -50,7 +50,7 @@ public class CommitService: ICommitService
         int count, int startIndex)
     {
         var commits = await _databaseContext.Commits
-            .Where(p=>p.Login == login || p.Repository == repository)       
+            .Where(p=>p.Login == login && p.Repository == repository)       
             .Skip(startIndex)
             .Take(count)
             .ToListAsync();
