@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "CommitsInUser";
+}
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@model IList<UralsibTaskTest.DTOs.CommitDto>
+@{
+    var currentPage = HttpContextAccessor.HttpContext!.Request.Query["page"].FirstOrDefault();
+    var count = HttpContextAccessor.HttpContext!.Request.Query["count"].FirstOrDefault();
+    var login = HttpContextAccessor.HttpContext!.Request.Query["login"].FirstOrDefault();
+    var repository = HttpContextAccessor.HttpContext!.Request.Query["repository"].FirstOrDefault();
+    var nextPage = string.IsNullOrEmpty(currentPage) ? 2 : int.Parse(currentPage) + 1;
+    var prevPage = string.IsNullOrEmpty(currentPage) || currentPage == "1" ? 1 : int.Parse(currentPage) - 1;
+}
+<div class="text-center">
+    <table class="table" id="commit-table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Repository</th>
+            <th scope="col">Message</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var commit in Model)
+        {
+            <tr>
+                <th scope="row">
+                    <input class="form-check-input" type="checkbox" value="@commit.Id" id="@commit.Sha">
+                    <label class="form-check-label" for="@commit.Sha"></label>
+                </th>
+                <th scope="row">@commit.Repository</th>
+                <td>@commit.Commit.Message</td>
+                <td>@commit.Commit.Author.Name</td>
+                <td>@commit.Commit.Author.Date.ToString()</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div class="flex-row align-content-center gap-10 m-1">
+        <button type="button" class="btn btn-danger" id="delete-commit-button">Delete</button>
+        <a class="btn btn-primary" role="button" asp-area="" asp-controller="Commit" asp-action="UpdateCommits" asp-route-login="@login" asp-route-repository="@repository">Update</a>
+    </div>
+    <div class="flex-row align-content-center gap-5 m-3">
+        <a href="?login=@login&repository=@repository&page=@prevPage&count=@count"@(currentPage == "1" ? "style=display:none" : "") class="btn btn-danger" role="button">Prev</a>
+        <a href="?login=@login&repository=@repository&page=@nextPage&count=@count"class="btn btn-primary" role="button">Next</a>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+            document.getElementById("delete-commit-button").addEventListener("click",async ()=>{
+                var selectedIds = [];
+                var checkboxes = document.querySelectorAll('#commit-table input[type="checkbox"]:checked');
+                    
+                    checkboxes.forEach(function(checkbox) {
+                        selectedIds.push(checkbox.value);
+                    });
+
+                    if(selectedIds.length === 0){
+                        alert("Выберите значения");
+                        return;
+                    }
+                
+                    var response = await fetch("@Url.Action("DeleteCommits", "Commit")",{
+                        method: 'POST',
+                        headers: {
+                             'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(selectedIds)
+                    });
+                    
+                    if (response.status === 200){
+                        checkboxes.forEach(function (checkbox) {
+                           checkbox.closest("tr").remove();
+                        });
+                        alert("Удалено");
+                    }
+                    
+                    if(response.status !==200){
+                        alert("Ошибка");
+                    }
+            });
+        })
+    </script>
+}

@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Login</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="PowerBlazer">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput2" class="form-label">Repository</label>
+        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Power-Messenger">
+    </div>
+    <div class="col-auto">
+        <button type="button" id="open-commits" class="btn btn-primary mb-3">Открыть</button>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+           document.getElementById("open-commits").addEventListener("click",()=>{
+              const firstInputLogin = document.getElementById("exampleFormControlInput1");
+              const secondInputRepository = document.getElementById("exampleFormControlInput2");
+              
+              location.href = `@Url.Action("Commits", "Commit")?login=${firstInputLogin.value}&repository=${secondInputRepository.value}&page=0&count=20`;
+           });
+        });
+    </script>
+}
